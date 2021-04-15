@@ -1,0 +1,9 @@
+
+AKS Version:
+az aks get-upgrades --resource-group myResourceGroup --name myAKSCluster
+
+Upgrade:
+az aks upgrade \
+    --resource-group myResourceGroup \
+    --name myAKSCluster \
+    --kubernetes-version KUBERNETES_VERSION

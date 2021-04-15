@@ -1,0 +1,127 @@
+https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough
+
+
+Create resource group
+az group create --name myResourceGroup --location eastus
+
+Enable cluster monitoring
+Check if they are registered
+az provider show -n Microsoft.OperationsManagement -o table
+az provider show -n Microsoft.OperationalInsights -o table
+
+if not:
+
+az provider register --namespace Microsoft.OperationsManagement
+az provider register --namespace Microsoft.OperationalInsights
+
+# Create cluster
+az aks create --resource-group rg_AKS --name aks101 --node-vm-size Standard_B2s --node-count 1 --enable-addons monitoring --generate-ssh-keys
+
+$ az aks create --resource-group rg_AKS --name aks101 --node-count 1 --generate-ssh-keys --attach-acr acrname
+The behavior of this command has been altered by the following extension: aks-preview
+The request content was invalid and could not be deserialized: 'Could not find member 'template' on object of type 'DeploymentDefinition'. Path 'template', line 1, position 12.'.
+PDKBLT5MACDEV3:aks101 gauravvig$ az aks create --resource-group rg_AKS --name aks101 --node-count 1  --generate-ssh-keys
+The behavior of this command has been altered by the following extension: aks-preview
+{
+  "aadProfile": null,
+  "addonProfiles": {
+    "KubeDashboard": {
+      "config": null,
+      "enabled": false,
+      "identity": null
+    }
+  },
+  "agentPoolProfiles": [
+    {
+      "availabilityZones": null,
+      "count": 1,
+      "enableAutoScaling": null,
+      "enableNodePublicIp": false,
+      "maxCount": null,
+      "maxPods": 110,
+      "minCount": null,
+      "mode": "System",
+      "name": "nodepool1",
+      "nodeImageVersion": "AKSUbuntu-1804gen2-2021.03.29",
+      "nodeLabels": {},
+      "nodeTaints": null,
+      "orchestratorVersion": "1.18.14",
+      "osDiskSizeGb": 128,
+      "osType": "Linux",
+      "provisioningState": "Succeeded",
+      "scaleSetEvictionPolicy": null,
+      "scaleSetPriority": null,
+      "spotMaxPrice": null,
+      "tags": null,
+      "type": "VirtualMachineScaleSets",
+      "upgradeSettings": null,
+      "vmSize": "Standard_DS2_v2",
+      "vnetSubnetId": null
+    }
+  ],
+  "apiServerAccessProfile": null,
+  "autoScalerProfile": null,
+  "diskEncryptionSetId": null,
+  "dnsPrefix": "aks101-rgAKS-9a2fc0",
+  "enablePodSecurityPolicy": false,
+  "enableRbac": true,
+  "fqdn": "aks101-rgaks-9a2fc0-00296db4.hcp.eastus.azmk8s.io",
+  "id": "/subscriptions/9a2fc043-39ba-4c0d-ab21-509ebc98453e/resourcegroups/rg_AKS/providers/Microsoft.ContainerService/managedClusters/aks101",
+  "identity": null,
+  "identityProfile": null,
+  "kubernetesVersion": "1.18.14",
+  "linuxProfile": {
+    "adminUsername": "azureuser",
+    "ssh": {
+      "publicKeys": [
+        {
+          "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDt8vUanMTsce0Gce3haAIxuFrCTCB2mq1tiSRD7wndOrmeiRtT1GpNiCGtyswNe4H6VseuzuS98F6m2hcZWZeXsP/jnkKSGtTEdGNPen21KroPlOVKyhdtV/c5y9puE5vJD8159SCnO6++NvFA2+KFL/NfFEJXWq4J2FM9YzJ/DNxXWCeLmCz0z0N182egAN4UbW0/Mk6c/siSFWyfSYamcWuLtMwjLltVwcmiWzSDF424kr5KQWFx0TOow9k2TsnGUFkb5XkDe4ciPXOHiLKPXPoUV0Te1KaVlPBD9feIVnWLdrfo8b83hjhWQdQUMzmVaWuroRR7Pt5INzG9rRP3"
+        }
+      ]
+    }
+  },
+  "location": "eastus",
+  "maxAgentPools": 10,
+  "name": "aks101",
+  "networkProfile": {
+    "dnsServiceIp": "10.0.0.10",
+    "dockerBridgeCidr": "172.17.0.1/16",
+    "loadBalancerProfile": {
+      "allocatedOutboundPorts": null,
+      "effectiveOutboundIps": [
+        {
+          "id": "/subscriptions/9a2fc043-39ba-4c0d-ab21-509ebc98453e/resourceGroups/MC_rg_AKS_aks101_eastus/providers/Microsoft.Network/publicIPAddresses/557754cf-776d-44f0-8954-2e6ac7237fa8",
+          "resourceGroup": "MC_rg_AKS_aks101_eastus"
+        }
+      ],
+      "idleTimeoutInMinutes": null,
+      "managedOutboundIps": {
+        "count": 1
+      },
+      "outboundIpPrefixes": null,
+      "outboundIps": null
+    },
+    "loadBalancerSku": "Standard",
+    "networkMode": null,
+    "networkPlugin": "kubenet",
+    "networkPolicy": null,
+    "outboundType": "loadBalancer",
+    "podCidr": "10.244.0.0/16",
+    "serviceCidr": "10.0.0.0/16"
+  },
+  "nodeResourceGroup": "MC_rg_AKS_aks101_eastus",
+  "privateFqdn": null,
+  "provisioningState": "Succeeded",
+  "resourceGroup": "rg_AKS",
+  "servicePrincipalProfile": {
+    "clientId": "dbf64104-f9bd-4860-a51a-3729db4a8ede",
+    "secret": null
+  },
+  "sku": {
+    "name": "Basic",
+    "tier": "Free"
+  },
+  "tags": null,
+  "type": "Microsoft.ContainerService/ManagedClusters",
+  "windowsProfile": null
+}

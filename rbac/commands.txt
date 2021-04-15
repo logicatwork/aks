@@ -1,0 +1,30 @@
+https://docs.microsoft.com/en-us/azure/role-based-access-control/tutorial-custom-role-cli#update-a-custom-role
+
+#Get a list of subscriptions
+az account list --output table
+
+$ az role definition create --role-definition "CRole-AKS-Role.json"
+{
+  "assignableScopes": [
+    "/subscriptions/9a2ddfdf3-39ba-4c0d-ab21-x32433dxc"
+  ],
+  "description": "A custom AKS role by logicatwork",
+  "id": "/subscriptions/9a2ddfdf3-39ba-4c0d-ab21-x32433dxc/providers/Microsoft.Authorization/roleDefinitions/6a1bf94a-477c-421b-97bd-1abb8fcec7b7",
+  "name": "6a1bf94a-477c-421b-97bd-1abb8fcec7b7",
+  "permissions": [
+    {
+      "actions": [],
+      "dataActions": [],
+      "notActions": [],
+      "notDataActions": []
+    }
+  ],
+  "roleName": "CRole-AKS",
+  "roleType": "CustomRole",
+  "type": "Microsoft.Authorization/roleDefinitions"
+}
+
+List custom roleDefinitions
+az role definition list --custom-role-only true
+
+$ az role definition list --name CRole-AKS-Role -o json

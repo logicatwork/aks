@@ -1,0 +1,10 @@
+az acr create --resource-group myResourceGroup --name <acrName> --sku Basic
+
+Get login url for acr to tag
+az acr list --resource-group myResourceGroup --query "[].{acrLoginServer:loginServer}" --output table
+
+List images in repository
+az acr repository list --name <acrName> --output table
+
+
+

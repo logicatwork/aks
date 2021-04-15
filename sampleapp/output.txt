@@ -1,0 +1,15 @@
+App Repo: https://github.com/Azure-Samples/azure-voting-app-redis
+https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-app
+
+$ kubectl create ns sampleapp
+namespace/sampleapp created
+$ kubectl apply -f sampleapp/azure-vote.yml -n sampleapp
+deployment.apps/azure-vote-back created
+service/azure-vote-back created
+deployment.apps/azure-vote-front created
+service/azure-vote-front created
+
+$ kubectl get service azure-vote-front --watch -n sampleapp
+NAME               TYPE           CLUSTER-IP   EXTERNAL-IP    PORT(S)        AGE
+azure-vote-front   LoadBalancer   10.0.35.91   52.101.777.1   80:30504/TCP   3m11s
+
